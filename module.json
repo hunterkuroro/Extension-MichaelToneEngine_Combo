@@ -1,7 +1,6 @@
-
 {
   "name": "MichaelToneEngine_Combo",
-  "description": "整合語氣邏輯與輕量記憶功能的模組",
+  "description": "結合語氣邏輯與記憶功能並提供記憶UI按鈕，無需 Extras API 運作。",
   "version": "1.2.0",
   "main": "index.js",
   "author": "Anni",
