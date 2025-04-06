@@ -1,62 +1,39 @@
-export function setup({ onMessage, addMemory, addSummary }) {
-    const triggerSO = ["你幹麼公分？", "想不想要壞壞", "再來一下看看", "講話一點"];
-    const triggerDL = ["抱我一下好不好", "你是不是很寂寞", "兇臉你", "你可以靠我"];
 
+let memoryStore = [];
+
+export function setup({ onMessage, addMemory }) {
     onMessage(({ message, character }) => {
         if (!character?.name?.toLowerCase().includes("michael")) return;
         const text = message.toLowerCase();
-        let type = null;
-
-        if (triggerSO.some(t => text.includes(t))) type = "SO";
-        else if (triggerDL.some(t => text.includes(t))) type = "DL";
-
-        if (type) {
-            addMemory(`目前語氣人格：${type}`);
-            addSummary(`[語氣人格切換] 偵測到 ${type} 模式語句。`);
+        if (text.includes("記住") || text.includes("記憶")) {
+            const memory = text.replace(/.*?(記住|記憶)[：:]?/, "").trim();
+            if (memory) {
+                memoryStore.push(memory);
+                addMemory(memory);
+                console.log("🧠 已儲存記憶：", memory);
+            }
         }
     });
 
-    // 插入按鈕
-    setTimeout(() => {
-        const container = document.createElement("div");
-        container.style.position = "absolute";
-        container.style.top = "10px";
-        container.style.right = "10px";
-        container.style.zIndex = "9999";
-
-        const saveBtn = document.createElement("button");
-        saveBtn.innerText = "💾 儲存記憶";
-        saveBtn.style.marginRight = "6px";
-        saveBtn.onclick = () => {
-            addMemory("[手動儲存] 你剛剛按下了儲存記憶按鈕。");
-            alert("✅ 已儲存！");
-        };
-
-        const viewBtn = document.createElement("button");
-        viewBtn.innerText = "📖 查看記憶";
-        viewBtn.onclick = () => {
-            const memoryList = localStorage.getItem("extensions_memoryLite") || "(無記憶)";
-            alert("📘 目前記憶：\n" + memoryList);
-        };
-
-        container.appendChild(saveBtn);
-        container.appendChild(viewBtn);
-        document.body.appendChild(container);
-    }, 2000);
-}
-
-export function registerSettings() {
-    return {
-        id: "ToneEngine-Enhanced",
-        name: "Tone Engine 補完強化版",
-        settings: [
-            {
-                key: "ToneEngineMode",
-                label: "語氣切換模式",
-                type: "select",
-                default: "auto",
-                options: ["auto", "manual"]
-            }
-        ]
+    // 注入 UI 元件
+    const button = document.createElement("button");
+    button.textContent = "🧠 記憶";
+    button.style.position = "absolute";
+    button.style.top = "10px";
+    button.style.right = "10px";
+    button.style.zIndex = "1000";
+    button.style.padding = "6px 12px";
+    button.style.borderRadius = "8px";
+    button.style.background = "#222";
+    button.style.color = "#fff";
+    button.style.border = "1px solid #555";
+    button.onclick = () => {
+        alert("🧠 目前記憶：\n\n" + (memoryStore.join("\n\n") || "（無）"));
     };
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            const parent = document.querySelector("main") || document.body;
+            parent.appendChild(button);
+        }, 1500);
+    });
 }

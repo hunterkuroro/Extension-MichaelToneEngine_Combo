@@ -1,7 +1,8 @@
+
 {
   "name": "MichaelToneEngine_Combo",
-  "description": "結合語氣邏輯與輕量記憶功能的模組組合",
-  "version": "1.2.0",
+  "description": "結合語氣邏輯與可視化記憶功能的模組整合版本，不需 Extras API。",
+  "version": "1.1.1",
   "main": "index.js",
   "author": "Anni",
   "license": "MIT"
