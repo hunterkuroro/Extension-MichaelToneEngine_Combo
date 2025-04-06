@@ -1,7 +1,7 @@
 {
   "name": "MichaelToneEngine Combo",
-  "description": "結合語氣邏輯與簡易記憶功能的模組。",
-  "version": "1.1.0",
+  "description": "結合語氣邏輯與易記憶功能的模組組合，附帶UI手動儲存按鈕。",
+  "version": "1.1.1",
   "main": "index.js",
   "author": "Anni",
   "license": "MIT"
