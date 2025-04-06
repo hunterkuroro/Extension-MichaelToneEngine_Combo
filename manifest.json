@@ -1,0 +1,10 @@
+{
+  "display_name": "MichaelToneEngine + MemoryLite",
+  "loading_order": 10,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "author": "Anni",
+  "version": "1.1.0",
+  "auto_update": false
+}
